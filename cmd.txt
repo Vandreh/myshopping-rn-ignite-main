@@ -1,0 +1,118 @@
+Curso Firebase - React-Native = Rocketseat
+https://app.rocketseat.com.br/node/fundamentos-do-firebase-no-react-native-2022/group/criando-o-projeto-2022/lesson/1640096587967-instalacao-do-firebase-app
+
+
+
+
+
+Download do projeto:
+https://app.rocketseat.com.br/node/fundamentos-do-firebase-no-react-native-2022/group/criando-o-projeto-2022/lesson/1640096587967-projeto-base
+https://github.com/rocketseat-education/myshopping-rn-ignite
+
+
+Criar projeto no Firebase:
+https://firebase.google.com/?gclid=Cj0KCQiA09eQBhCxARIsAAYRiykMiZLXuwTJcO40G-zldkHwZJjcpVSkzHt55b6p8plL39qEGRrqh1caAnFGEALw_wcB&gclsrc=aw.ds
+
+
+Rodar este codigo na pasta Android antes de rodar este: cd android && ./gradlew signinReport
+chmod +x gradlew
+5E:8F:16:06:2E:A3:CD:2C:4A:0D:54:78:76:BA:A6:F3:8C:AB:F6:25
+
+
+Adicionando Android no Firebase:
+https://console.firebase.google.com/project/myshopping321654987/overview
+add android:
+android package name: com.myshopping123
+...
+
+nos arquivos MainActivity e MainApplication mudar o package para: com.myshopping123
+
+no terminal roda: yarn android     #da erro
+na pasta Android rodar: ./gradlew --warning-mode=all
+remove o 123 no package dos arquivos MainActivity e MainApplication
+cd ..
+no terminal rodar: yarn android     #da certo
+
+
+Instalar FIrebase no projeto:
+https://rnfirebase.io/
+yarn add @react-native-firebase/app
+
+
+https://console.firebase.google.com/project/myshopping321654987/firestore/data/~2Fproducts~2Fd1l1CGnHpXuqoffTN2Qh
+
+
+Instalar Cloud Firestore:
+https://rnfirebase.io/firestore/usage
+yarn add @react-native-firebase/firestore
+
+
+
+Emulador do Firebase:
+https://app.rocketseat.com.br/node/fundamentos-do-firebase-no-react-native-2022/group/cloud-firestore-2022/lesson/1640096587980-instalacao-e-configuracao-do-emulador-do-cloud-firestore
+https://rnfirebase.io/firestore/emulator
+
+instalar o emulador:
+curl -sL firebase.tools | bash
+
+inicializar o emulador:
+firebase emulators:start --only firestore
+
+no index.js inserir estes codigos:
+import '@react-native-firebase/app';
+import firestore from '@react-native-firebase/firestore';
+
+// set the host and the port property to connect to the emulator
+// set these before any read/write operations occur to ensure it doesn't affect your Cloud Firestore data!
+if (__DEV__) {
+  firestore().useEmulator('localhost', 8080);
+}
+
+const db = firestore();
+
+caso deseje substiruir 'localhost' pelo IP do computador:
+para saber o IP da maquina: inserir no terminal:
+ifconfig eno1   #no windows ipconfig eno1
+ou acessar a web: meuip
+
+no terminal digitar:
+yarn start
+yarn android
+firebase emulators:start --only firestore
+
+
+
+Storage do Firebase para armazenar arquivos:
+https://console.firebase.google.com/project/myshopping321654987/storage
+
+em Rules:
+mudar este codigo para o seguinte:
+    rules_version = '2';
+    service firebase.storage {
+        match /b/{bucket}/o {
+            match /{allPaths=**} {
+                allow read, write: if false;
+            }
+        }
+    }
+
+mudar para este:
+    rules_version = '2';
+    service firebase.storage {
+        match /b/{bucket}/o {
+            match /{allPaths=**} {
+                allow read, write;
+            }
+        }
+    }
+
+
+instalar o Cloud Storage:
+https://rnfirebase.io/storage/usage
+yarn add @react-native-firebase/storage
+
+
+
+
+
+
